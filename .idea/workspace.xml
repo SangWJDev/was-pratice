@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="abd6e67f-2fd5-4441-91a2-865e7926c1e3" name="변경" comment="feat: http 통신 규약에 맞게 parsing하고 결과를 return">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/ClientRequestHandler.java" afterDir="false" />
+    <list default="true" id="abd6e67f-2fd5-4441-91a2-865e7926c1e3" name="변경" comment="refactor: 스레드 생성&#10;&#10;- 요청이 들어올 때 main이 아닌 서브 스레드 생성하여 처리">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CustomWebApplicationServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CustomWebApplicationServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -199,7 +198,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1746339254483</updated>
-      <workItem from="1746339255654" duration="10686000" />
+      <workItem from="1746339255654" duration="11446000" />
     </task>
     <task id="LOCAL-00001" summary="initial build">
       <option name="closed" value="true" />
@@ -217,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746348909837</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="refactor: 스레드 생성&#10;&#10;- 요청이 들어올 때 main이 아닌 서브 스레드 생성하여 처리">
+      <option name="closed" value="true" />
+      <created>1746425589415</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1746425589415</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,7 +233,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial build" />
     <MESSAGE value="feat: http 통신 규약에 맞게 parsing하고 결과를 return" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: http 통신 규약에 맞게 parsing하고 결과를 return" />
+    <MESSAGE value="refactor: 스레드 생성&#10;&#10;- 요청이 들어올 때 main이 아닌 서브 스레드 생성하여 처리" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: 스레드 생성&#10;&#10;- 요청이 들어올 때 main이 아닌 서브 스레드 생성하여 처리" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
