@@ -31,41 +31,18 @@ public class CustomWebApplicationServer {
       Socket clientSocket;
       logger.info("[CustomWebApplicationServer] Waiting for client connection...");
 
-      while((clientSocket = serverSocket.accept()) != null) {
-        logger.info("[CustomWebApplicationServer] Accepted connection from {}", clientSocket.getRemoteSocketAddress());
+      while ((clientSocket = serverSocket.accept()) != null) {
+        logger.info("[CustomWebApplicationServer] Accepted connection from {}",
+            clientSocket.getRemoteSocketAddress());
 
         /**
-         * Step1 - 사용자 요청용 메인 Thread가 처리되도록 한다.
-         *
+         * Step2 - 사용자 요청이 들어올 때마다 Thread를 새로 생성해서 사용자 요청을 처리하도록 한다.
+         * 문제점: 요청이 들어올 때마다 스레드를 생성하면 스레드가 많아지고 -> cpu contextSwitching이 빈번해진다.
+         * cpu 사용량, 메모리 사용량 증가
+         * 해결방법: 사용자 요청이 들어올 때마다 생성하는 게 아니라 스레드 pool을 적용해 안정적인 서비스가 가능하도록 개선.
          */
-
-        try (InputStream in = clientSocket.getInputStream(); OutputStream out = clientSocket.getOutputStream()){
-          BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
-          DataOutputStream dos = new DataOutputStream(out);
-
-          HttpRequest httpRequest = new HttpRequest(br);
-
-          if (httpRequest.isGetRequest() && httpRequest.matchPath("/calculate")) {
-            QueryStrings queryStrings = httpRequest.getQueryStrings();
-
-            int operand1 = Integer.parseInt(queryStrings.getValue("operand1"));
-            String operator = queryStrings.getValue("operator");
-            int operand2 = Integer.parseInt(queryStrings.getValue("operand2"));
-
-            int result = Calculator.calculate(new PositiveNumber(operand1), operator, new PositiveNumber(operand2));
-            byte[] body = String.valueOf(result).getBytes();
-
-            HttpResponse response = new HttpResponse(dos);
-            response.response200Header("application/json", body.length);
-            response.responseBody(body);
-          }
-
-        } catch (IOException e) {
-          throw new RuntimeException(e);
-        }
+        new Thread(new ClientRequestHandler(clientSocket)).start();
       }
     }
-
   }
-
 }
